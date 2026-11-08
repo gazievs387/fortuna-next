@@ -19,10 +19,12 @@ function ContactForm({ close }: { close: () => void }) {
     e.preventDefault();
     setStatus("sending");
     try {
-      await axios.post("",
+      const functionUrl = ""
+      
+      await axios.post(functionUrl,
         Object.fromEntries(new FormData(e.currentTarget)),
         { headers: { "Content-Type": "application/json" } },
-      ).then((response) => {console.log(response.data);});
+      );
 
       setStatus("success");
       window.location.href = "/reservation-complete/";
