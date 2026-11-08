@@ -1,0 +1,89 @@
+
+
+
+main {
+    padding-top: 80px;
+}
+
+#logo_text {
+    width: 80%;
+    padding-left: 10%;
+    padding-bottom: 5px;
+}
+
+#logo_text > a > span {
+    font-size: 38px;
+    font-family: "Great Vibes", cursive;
+    background: #0091FF;
+    background: linear-gradient(to right, #0091FF 0%, #00D4F5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 10px;
+}
+
+#logo_text > a {
+    text-decoration: none;
+}
+
+
+#main {
+    width: 80%;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 24px 0px;
+    padding: 25px 20px;
+    margin-left: 10%;
+}
+
+p {
+    font-size: 18px;
+}
+
+#to_main_btn {
+    width: 80%;
+    padding-top: 20px;
+    padding-left: 10%;
+}
+
+#to_main_btn > a > button {
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.4s all;
+    padding: 6px 18px;
+    margin-top: 4px;
+}
+
+#to_main_btn > a > button:hover {
+    opacity: 0.75;
+}
+
+
+
+@media (max-width: 767px) {
+    #logo_text {
+        width: 90%;
+        padding-left: 5%;
+    }
+
+    #main {
+        width: 90%;
+        padding: 25px 15px;
+        margin-left: 5%;
+    }
+
+    h4 {
+        font-size: 18px !important;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    #to_main_btn {
+        width: 90%;
+        padding-left: 5%;
+    }
+
+}
