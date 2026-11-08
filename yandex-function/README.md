@@ -1,4 +1,7 @@
-# Yandex Cloud Function environment
+# Yandex Cloud Function (Node.js)
+
+Entry point: `index.handler`. Install dependencies from this directory before
+uploading the function package (`npm install --omit=dev`).
 
 Configure these variables on the function:
 

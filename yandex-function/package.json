@@ -1,0 +1,9 @@
+{
+  "name": "fortuna-booking-function",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "nodemailer": "^7.0.3"
+  }
+}
