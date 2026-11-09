@@ -53,7 +53,7 @@ function ContactForm({ close }: { close: () => void }) {
     <span style={{fontSize:14,color:"gray"}}>Кликните по элементу даты, чтобы выбрать</span><br/>
     C <input className="date11" required name="date1" type="date" value={dates.date1} onChange={(event) => setDates((current) => ({ ...current, date1: event.target.value }))} />
     <span id="date2">до <input className="date11" required name="date2" type="date" value={dates.date2} onChange={(event) => setDates((current) => ({ ...current, date2: event.target.value }))} /></span>
-    {(dates.date1 || dates.date2) && <span aria-live="polite" style={{ fontSize: 14, color: "gray", marginLeft: 8 }}>{formatRussianDate(dates.date1)}{dates.date1 && dates.date2 ? " — " : ""}{formatRussianDate(dates.date2)}</span>}<br/><br/>
+    <br/>{(dates.date1 || dates.date2) && <span aria-live="polite" style={{ display: "block", fontSize: 14, color: "gray", marginTop: 4 }}>{formatRussianDate(dates.date1)}{dates.date1 && dates.date2 ? " — " : ""}{formatRussianDate(dates.date2)}</span>}<br/>
     <label>Телефон</label><br/><input id="telephone1" className="form11" required name="phone_number" type="tel"/><br/><br/>
     <label>Email</label><br/><input id="email1" className="form11" name="email" type="email" placeholder="Необязательно"/><br/><br/>
     <label>Сообщение</label><br/><textarea id="text-area1" className="form11" name="message" rows={4} cols={50} placeholder="Ваше сообщение(необязательно)"/><br/>
@@ -115,7 +115,7 @@ export default function Home() {
       <div id="part1_01">
         <header>
           <h2>Фортуна</h2>
-          <span id="phone_number">+7 (940) 991-61-61 WhatsApp Telegram</span>
+          <span id="phone_number">+7 (940) 991-61-61 WhatsApp Telegram Max</span>
           <div id="header1"></div>
         </header>
         <div id="part1">
@@ -132,7 +132,7 @@ export default function Home() {
             <div id="i5">
               Адрес: р. Абхазия, г. Пицунда, с. Лдзаа, ул. Назадзе, 54/д
               <br />
-              +7 (940) 991-61-61 - Фатима (WhatsApp Telegram)
+              +7 (940) 991-61-61 - Фатима (WhatsApp Telegram Max)
             </div>
           </div>
         <div id="part1_2">
@@ -209,7 +209,7 @@ export default function Home() {
       </div>
       {modal && (
         <><div className="modal-backdrop fade show" onClick={()=>setModal("")}></div>
-        <div className="modal fade show d-block" id={modal === "booking" ? "modal1" : "modal2"} tabIndex={-1} aria-modal="true" role="dialog" onClick={(event)=>{if(event.target===event.currentTarget)setModal("")}}><div className={`modal-dialog ${modal === "question" ? "modal-dialog-centered" : ""}`}><div className="modal-content"><div className="modal-header"><h2 className="modal-title fs-5">{modal === "booking" ? "Бронирование" : "Задать вопрос"}</h2><button type="button" className="btn-close" aria-label="Close" onClick={()=>setModal("")}></button></div><div className="modal-body">{modal === "booking" ? <ContactForm close={()=>setModal("")}/> : <><p>Вы можете задать вопрос в любой момент позвонив или отправив сообщение </p><br/><p>📱 +7 (940) 991-61-61 Фатима (WhatsApp Telegram)</p><p><button id="number" type="button" onClick={()=>{if(navigator.clipboard)navigator.clipboard.writeText("+79409916161");setCopied(true);setTimeout(()=>setCopied(false),2000)}} className="copy_number">{copied ? "Номер скопирован" : "Скопировать номер телефона"}</button></p></>}</div></div></div></div></>
+        <div className="modal fade show d-block" id={modal === "booking" ? "modal1" : "modal2"} tabIndex={-1} aria-modal="true" role="dialog" onClick={(event)=>{if(event.target===event.currentTarget)setModal("")}}><div className={`modal-dialog ${modal === "question" ? "modal-dialog-centered" : ""}`}><div className="modal-content"><div className="modal-header"><h2 className="modal-title fs-5">{modal === "booking" ? "Бронирование" : "Задать вопрос"}</h2><button type="button" className="btn-close" aria-label="Close" onClick={()=>setModal("")}></button></div><div className="modal-body">{modal === "booking" ? <ContactForm close={()=>setModal("")}/> : <><p>Вы можете задать вопрос в любой момент позвонив или отправив сообщение </p><br/><p>📱 +7 (940) 991-61-61 Фатима (WhatsApp Telegram Max)</p><p><button id="number" type="button" onClick={()=>{if(navigator.clipboard)navigator.clipboard.writeText("+79409916161");setCopied(true);setTimeout(()=>setCopied(false),2000)}} className="copy_number">{copied ? "Номер скопирован" : "Скопировать номер телефона"}</button></p></>}</div></div></div></div></>
       )}
     </main>
   );
