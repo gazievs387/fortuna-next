@@ -486,3 +486,13 @@ form {
         font-size: 10px;
     }
 }
+
+@media (max-width: 767px) {
+    html {
+        scrollbar-gutter: stable;
+    }
+
+    html.fslightbox-open body {
+        margin-right: 0 !important;
+    }
+}
