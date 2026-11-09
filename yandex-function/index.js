@@ -31,6 +31,29 @@ function parseBody(event) {
   return JSON.parse(body);
 }
 
+function formatRussianDate(value) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!match) return value;
+
+  const [, yearText, monthText, dayText] = match;
+  const year = Number(yearText);
+  const month = Number(monthText);
+  const day = Number(dayText);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== month - 1 ||
+    date.getUTCDate() !== day
+  ) return value;
+
+  return new Intl.DateTimeFormat("ru-RU", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(date);
+}
+
 function smtpTransport() {
   return nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -76,6 +99,8 @@ module.exports.handler = async function handler(event) {
       String(data[field] || "").trim().slice(0, 2000),
     ]),
   );
+  values.date1 = formatRussianDate(values.date1);
+  values.date2 = formatRussianDate(values.date2);
 
 try {
   const transporter = smtpTransport();

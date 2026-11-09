@@ -13,15 +13,32 @@ const photos = [
   ["/images/img1/image (4).jpeg", "/images/img1/image (4).jpeg", "Интерьер номера на базе отдыха Фортуна"],
   ["/images/q_images/image9.webp", "/images/image9.jpg", "Коттеджи базы отдыха Фортуна рядом с Пицундой"],
 ];
+
+function formatRussianDate(value: string) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return "";
+  const [year, month, day] = value.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== month - 1 ||
+    date.getUTCDate() !== day
+  ) return "";
+  return new Intl.DateTimeFormat("ru-RU", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(date);
+}
+
 function ContactForm({ close }: { close: () => void }) {
   const [status, setStatus] = useState("");
+  const [dates, setDates] = useState({ date1: "", date2: "" });
   async function send(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("sending");
     try {
-      const functionUrl = ""
-      
-      await axios.post(functionUrl,
+      await axios.post("https://functions.yandexcloud.net/d4e813m5ckkctu4sdp7u",
         Object.fromEntries(new FormData(e.currentTarget)),
         { headers: { "Content-Type": "application/json" } },
       );
@@ -34,8 +51,9 @@ function ContactForm({ close }: { close: () => void }) {
   }
   return <form method="post" onSubmit={send}>
     <span style={{fontSize:14,color:"gray"}}>Кликните по элементу даты, чтобы выбрать</span><br/>
-    C <input className="date11" required name="date1" type="date" />
-    <span id="date2">до <input className="date11" required name="date2" type="date" /></span><br/><br/>
+    C <input className="date11" required name="date1" type="date" value={dates.date1} onChange={(event) => setDates((current) => ({ ...current, date1: event.target.value }))} />
+    <span id="date2">до <input className="date11" required name="date2" type="date" value={dates.date2} onChange={(event) => setDates((current) => ({ ...current, date2: event.target.value }))} /></span>
+    {(dates.date1 || dates.date2) && <span aria-live="polite" style={{ fontSize: 14, color: "gray", marginLeft: 8 }}>{formatRussianDate(dates.date1)}{dates.date1 && dates.date2 ? " — " : ""}{formatRussianDate(dates.date2)}</span>}<br/><br/>
     <label>Телефон</label><br/><input id="telephone1" className="form11" required name="phone_number" type="tel"/><br/><br/>
     <label>Email</label><br/><input id="email1" className="form11" name="email" type="email" placeholder="Необязательно"/><br/><br/>
     <label>Сообщение</label><br/><textarea id="text-area1" className="form11" name="message" rows={4} cols={50} placeholder="Ваше сообщение(необязательно)"/><br/>
