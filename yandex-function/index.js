@@ -110,7 +110,16 @@ try {
     to: "gazievs387@gmail.com",
     subject: "Фортуна Бронирование номера",
     text: Object.entries(values)
-      .map(([field, value]) => `${field}: ${value}`)
+        .map(([field, value]) => {
+          const labels = {
+            date1: "Дата заезда",
+            date2: "Дата отъезда",
+            phone_number: "Номер телефона",
+            email: "Email",
+            message: "Сообщение",
+          };
+          return `${labels[field] || field}: ${value}`;
+        })
       .join("\n"),
   });
 
