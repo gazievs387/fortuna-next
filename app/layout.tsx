@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { YandexMetrika } from "./components/yandex-metrika";
 import "./globals.css";
-
-const yandexMetrika = `(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r)return;}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(100882496,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});`;
 
 export const metadata: Metadata = {
   title: "База отдыха Фортуна в Лдзаа, Абхазия | Коттеджи у моря",
@@ -35,8 +34,7 @@ export default function RootLayout({
     <html lang="ru">
   <body>
     {children}
-    <noscript><div><img src="https://mc.yandex.ru/watch/100882496" style={{position:"absolute",left:"-9999px"}} alt="" /></div></noscript>
-    <Script id="yandex-metrika" strategy="afterInteractive" dangerouslySetInnerHTML={{__html:yandexMetrika}} />
+    <YandexMetrika />
     <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" strategy="afterInteractive" />
   </body>
     </html>
